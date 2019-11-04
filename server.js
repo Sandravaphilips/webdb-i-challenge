@@ -8,7 +8,7 @@ server.use(express.json());
 
 server.get('/accounts', async(req, res) => {
     try {
-        const accounts = await db('accounts');
+        const accounts = await db('accounts').   orderBy('id', 'DESC').limit(req.query.limit || 100);
         return res.json(accounts)
     } catch(err) {
         return res.json({error: err.message});
